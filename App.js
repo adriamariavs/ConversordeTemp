@@ -4,6 +4,7 @@ import { styles } from "./src/style/Style";
 // Importando componentes
 import TxtComponents from "./src/Componentes/TxtComponents";
 import TxtInput from "./src/Componentes/TxtInput";
+import MdComponent from "./src/Componentes/Modal";
 
 export default function App() {
   //Variaveis de estado de valores
@@ -33,45 +34,34 @@ export default function App() {
     <View style={styles.container}>
       {/* View para caixa de fundo (css) */}
       <View style={styles.caixa}>
-       
         {/* Titulo da pagina */}
-        <TxtComponents estilos={styles.titulo} Textos="Conversão de Temperatura" />
+        <TxtComponents
+          estilos={styles.titulo}
+          Textos="Conversão de Temperatura"
+        />
 
         {/* TextInput para colocar a valor para realizar o calculo */}
-        <TxtInput styleinput={styles.TextInput} valor={celsius} texto="VALOR" textochamar={setCelsius}/>
+        <TxtInput
+          styleinput={styles.TextInput}
+          valor={celsius}
+          texto="VALOR"
+          textochamar={setCelsius}
+        />
 
         {/* Botão para calculo */}
         <TouchableOpacity style={styles.Btn} onPress={conversao}>
-         
           {/* Titulo do botão */}
-        <TxtComponents estilos={styles.Txt} Textos="CALCULAR" />
-        
+          <TxtComponents estilos={styles.Txt} Textos="CALCULAR" />
         </TouchableOpacity>
       </View>
 
       {/* Abrir modal */}
-      <Modal visible={modal} onRequestClose={setModal}>
-        <View style={styles.containerModal}>
-          <View style={styles.caixaModal}>
-           
-            {/* Titulo Modal */}
-            <TxtComponents estilos={styles.tituloModal} Textos="Conversão para Fahrenheit" />
-
-            {/* Texto de resultado */}
-            <TxtComponents estilos={styles.resultado} Textos= {resultado} />
-
-            {/* Fechar Modal/Botão */}
-            <TouchableOpacity
-              style={styles.BtnModal}
-              onPress={calcularNovamente}
-            >
-              {/* Titulo do botão */}
-              <TxtComponents estilos={styles.TxtModal} Textos="CALCULAR NOVAMENTE" />
-
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      <MdComponent
+        md={modal}
+        setModal={setModal}
+        Textos={resultado}
+        funcao={calcularNovamente}
+      />
     </View>
   );
 }
